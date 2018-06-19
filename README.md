@@ -14,6 +14,8 @@
 * [한국어](README-ko.md)
 * [Turkish](README-tr.md)
 * [Greek](README-gr.md)
+* [Magyar](README-hu.md)
+* [Polish](README-pl.md)
 
 ## What is Regular Expression?
 
@@ -68,6 +70,7 @@ letter and also it is too short.
   - [Case Insensitive](#51-case-insensitive)
   - [Global search](#52-global-search)
   - [Multiline](#53-multiline)
+- [Greedy vs lazy matching](#6-greedy-vs-lazy-matching)
 
 ## 1. Basic Matchers
 
@@ -193,7 +196,7 @@ followed by lowercase character `a`, followed by lowercase character `t`,
 followed by zero or more spaces.
 
 <pre>
-"\s*cat\s*" => The fat<a href="#learn-regex"><strong> cat </strong></a>sat on the <a href="#learn-regex">con<strong>cat</strong>enation</a>.
+"\s*cat\s*" => The fat<a href="#learn-regex"><strong> cat </strong></a>sat on the con<a href="#learn-regex"><strong>cat</strong></a>enation.
 </pre>
 
 [Test the regular expression](https://regex101.com/r/gGrwuz/1)
@@ -260,14 +263,14 @@ regular expression `[0-9]{3}` means: Match exactly 3 digits.
 
 [Test the regular expression](https://regex101.com/r/Sivu30/1)
 
-## 2.5 Character Group
+## 2.5 Capturing Group
 
-Character group is a group of sub-patterns that is written inside Parentheses `(...)`.
-As we discussed before that in regular expression if we put a quantifier after a
-character then it will repeat the preceding character. But if we put quantifier
-after a character group then it repeats the whole character group. For example,
+A capturing group is a group of sub-patterns that is written inside Parentheses 
+`(...)`. Like As we discussed before that in regular expression if we put a quantifier 
+after a character then it will repeat the preceding character. But if we put quantifier
+after a capturing group then it repeats the whole capturing group. For example,
 the regular expression `(ab)*` matches zero or more repetitions of the character
-"ab". We can also use the alternation `|` meta character inside character group.
+"ab". We can also use the alternation `|` meta character inside capturing group.
 For example, the regular expression `(c|g|p)ar` means: lowercase character `c`,
 `g` or `p`, followed by character `a`, followed by character `r`.
 
@@ -276,6 +279,27 @@ For example, the regular expression `(c|g|p)ar` means: lowercase character `c`,
 </pre>
 
 [Test the regular expression](https://regex101.com/r/tUxrBG/1)
+
+Note that capturing groups do not only match but also capture the characters for use in 
+the parent language. The parent language could be python or javascript or virtually any
+language that implements regular expressions in a function definition.
+
+### 2.5.1 Non-capturing group
+
+A non-capturing group is a capturing group that only matches the characters, but 
+does not capture the group. A non-capturing group is denoted by a `?` followed by a `:` 
+within parenthesis `(...)`. For example, the regular expression `(?:c|g|p)ar` is similar to 
+`(c|g|p)ar` in that it matches the same characters but will not create a capture group.
+
+<pre>
+"(?:c|g|p)ar" => The <a href="#learn-regex"><strong>car</strong></a> is <a href="#learn-regex"><strong>par</strong></a>ked in the <a href="#learn-regex"><strong>gar</strong></a>age.
+</pre>
+
+[Test the regular expression](https://regex101.com/r/Rm7Me8/1)
+
+Non-capturing groups can come in handy when used in find-and-replace functionality or 
+when mixed with capturing groups to keep the overview when producing any other kind of output. 
+See also [4. Lookaround](# 4. Lookaround).
 
 ## 2.6 Alternation
 
@@ -538,6 +562,23 @@ at the end of each line in a string.
 </pre>
 
 [Test the regular expression](https://regex101.com/r/E88WE2/1)
+
+## 6. Greedy vs lazy matching
+By default regex will do greedy matching , means it will match as long as
+possible. we can use `?` to match in lazy way means as short as possible
+
+<pre>
+"/(.*at)/" => <a href="#learn-regex"><strong>The fat cat sat on the mat</strong></a>. </pre>
+
+
+[Test the regular expression](https://regex101.com/r/AyAdgJ/1)
+
+<pre>
+"/(.*?at)/" => <a href="#learn-regex"><strong>The fat</strong></a> cat sat on the mat. </pre>
+
+
+[Test the regular expression](https://regex101.com/r/AyAdgJ/2)
+
 
 ## Contribution
 

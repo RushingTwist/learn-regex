@@ -13,6 +13,8 @@
 * [日本語](README-ja.md)
 * [한국어](README-ko.md)
 * [Greek](README-gr.md)
+* [Magyar](README-hu.md)
+* [Polish](README-pl.md)
 
 ## O que é uma Expressão Regular?
 
